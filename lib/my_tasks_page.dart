@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:first_flutter_project/add_task_page.dart';
 import 'package:first_flutter_project/constants.dart';
 import 'package:first_flutter_project/enums.dart';
+import 'package:first_flutter_project/task_card_widget.dart';
+import 'package:first_flutter_project/task_detail_page.dart';
 import 'package:first_flutter_project/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +47,24 @@ class _MyTasksPageState extends State<MyTasksPage> {
     setState(() {});
   }
 
+  void updateTask(TaskModel currentTask) async {
+    final index = allTasksList.indexWhere((item) => item.id == currentTask.id);
+    allTasksList[index] = currentTask.copyWith(
+      taskStatus: currentTask.taskStatus == TaskStatus.pending
+          ? TaskStatus.completed
+          : TaskStatus.pending,
+    );
+
+    final List<String> taskStringList = [];
+
+    for (TaskModel task in allTasksList) {
+      taskStringList.add(jsonEncode(task.toJson()));
+    }
+    await prefs.setStringList(AppConstants.taskListKey, taskStringList);
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -69,22 +89,18 @@ class _MyTasksPageState extends State<MyTasksPage> {
         },
         itemBuilder: (context, index) {
           final task = allTasksList[index];
-          return Container(
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: Colors.white,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  height: 25,
-                  width: 25,
-                  decoration: BoxDecoration(shape: BoxShape.circle),
-                ),
-                Expanded(child: Column(children: [Text(task.title)])),
-              ],
-            ),
+          return TaskCardWidget(
+            task: task,
+            onRadioTap: () {
+              // Todo: Bu yerni bosganda task pending holatidan completedga o'tishi kerak
+              updateTask(task);
+            },
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TaskDetailPage()),
+              );
+            },
           );
         },
       ),

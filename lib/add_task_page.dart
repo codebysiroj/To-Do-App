@@ -5,6 +5,7 @@ import 'package:first_flutter_project/enums.dart';
 import 'package:first_flutter_project/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -36,6 +37,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         prefs.getStringList(AppConstants.taskListKey) ?? <String>[];
 
     final TaskModel task = TaskModel(
+      id: Uuid().v4(),
       title: titleController.text,
       description: descriptionController.text,
       category: selectedTaskCategory!,
@@ -47,7 +49,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     taskStringList.add(taskJson);
 
     await prefs.setStringList(AppConstants.taskListKey, taskStringList);
-    if(!mounted) return;
+    if (!mounted) return;
     Navigator.pop(context, true);
   }
 
