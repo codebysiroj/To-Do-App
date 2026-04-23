@@ -1,4 +1,4 @@
-import 'package:first_flutter_project/enums.dart';
+import 'package:first_flutter_project/utils/enums.dart';
 
 class TaskModel {
   final String id;

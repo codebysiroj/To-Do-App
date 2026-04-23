@@ -1,6 +1,6 @@
-import 'package:first_flutter_project/enums.dart';
-import 'package:first_flutter_project/task_category_widget.dart';
-import 'package:first_flutter_project/task_model.dart';
+import 'package:first_flutter_project/utils/enums.dart';
+import 'package:first_flutter_project/widgets/task_category_widget.dart';
+import 'package:first_flutter_project/models/task_model.dart';
 import 'package:flutter/material.dart';
 
 class TaskCardWidget extends StatelessWidget {

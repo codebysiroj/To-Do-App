@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:first_flutter_project/constants.dart';
-import 'package:first_flutter_project/enums.dart';
-import 'package:first_flutter_project/task_model.dart';
+import 'package:first_flutter_project/utils/constants.dart';
+import 'package:first_flutter_project/utils/enums.dart';
+import 'package:first_flutter_project/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';

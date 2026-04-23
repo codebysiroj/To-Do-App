@@ -1,5 +1,5 @@
-import 'package:first_flutter_project/app_extensions.dart';
-import 'package:first_flutter_project/enums.dart';
+import 'package:first_flutter_project/utils/app_extensions.dart';
+import 'package:first_flutter_project/utils/enums.dart';
 import 'package:flutter/material.dart';
 
 class TaskCategoryWidget extends StatelessWidget {
